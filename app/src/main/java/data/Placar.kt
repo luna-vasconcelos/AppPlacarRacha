@@ -18,6 +18,7 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
 
     fun copy() : Placar{
         var answ: Placar = Placar(nome_partida, resultado, resultadoLongo, has_timer)
+        answ.regras = regras
         answ.pontos = pontos.copyOf()
         answ.nomeJogadores = nomeJogadores.copyOf()
         answ.games = games.copyOf()

@@ -1,7 +1,8 @@
 package data.strategy
 import data.Placar
+import java.io.Serializable
 
-fun updateSets(placar: Placar, time: Int) : ScoringStrategy {
+fun updateSets(placar: Placar, time: Int): ScoringStrategy {
     placar.pontos = arrayOf(0, 0)
     placar.games = arrayOf(0, 0)
     placar.sets[time]++
@@ -17,6 +18,6 @@ fun updateSets(placar: Placar, time: Int) : ScoringStrategy {
         }
     }
 }
-interface ScoringStrategy {
+interface ScoringStrategy : Serializable {
     fun pontua(placar: Placar, time: Int): ScoringStrategy
 }
