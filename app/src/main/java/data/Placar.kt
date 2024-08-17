@@ -16,12 +16,28 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
     var games: Array<Int> = arrayOf(0, 0)
     var sets: Array<Int> = arrayOf(0, 0)
 
-    fun pontua(time: Int) : Int {
-        val toInt: (Boolean) -> Int = { if (it) 1 else 0 }
-        pontos[time] = (pontos[time]+1)%4;
-        games[time] = (games[time] + toInt(pontos[time]==0))%gamesToSet
-        sets[time] = (sets[time] + toInt(games[time]==0))
-        return toInt(pontos[time]==0) + toInt(games[time]==0) + toInt(sets[time] > totalSets-sets[time])
+    fun pontua(time: Int) : EstadoPartida {
+        var estado = EstadoPartida.CONTINUA
+
+        pontos[time]++;
+        if (pontos[time] == 4) {
+            estado = EstadoPartida.GAME_COMPLETO
+            pontos[time] = 0;
+
+            games[time]++
+            if (games[time] == gamesToSet) {
+                estado = EstadoPartida.SET_COMPLETO
+                games[time] = 0
+
+                sets[time]++;
+
+                if (sets[time] > totalSets-sets[time]) {
+                    estado = EstadoPartida.PARTIDA_ENCERRADA
+                }
+            }
+        }
+
+        return estado
     }
 
     fun copy() : Placar{
