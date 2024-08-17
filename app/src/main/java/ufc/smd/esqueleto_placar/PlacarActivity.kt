@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.getSystemService
 import data.Placar
+import org.w3c.dom.Text
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.ObjectInputStream
@@ -22,40 +23,40 @@ import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
 class PlacarActivity : AppCompatActivity() {
-    lateinit var placar:Placar
-    lateinit var tvResultadoJogo1: TextView
-    lateinit var tvResultadoJogo2: TextView
-    var game1 = 0
-    var game2 = 0
-    var show_result = 0
+
+    lateinit var placar: Placar
+    lateinit var tvResultado: Array<TextView>
+    val pilhaPlacar = java.util.Stack<Placar>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
+        Log.d("d","ping")
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
-
-        tvResultadoJogo1 = findViewById(R.id.tvPlacar1)
-        tvResultadoJogo2 = findViewById(R.id.tvPlacar2)
-
+        tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))        
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
-        tvNomePartida.text=placar.nome_partida
+        //tvNomePartida.text=placar.nome_partida
         ultimoJogos()
     }
 
     fun alteraPlacar(v: View) {
-        when (v.id) {
-            R.id.tvPlacar1 -> {
-                game1++
-                placar.resultado = ""+game1+" x "+ game2
-                tvResultadoJogo1.text = game1.toString()
-            }
-            R.id.tvPlacar2 -> {
-                game2++
-                placar.resultado = ""+game1+" x "+ game2
-                tvResultadoJogo2.text = game2.toString()
-                vibrar(v)
-            }
+       if (v is TextView) {
+           pilhaPlacar.push(placar.copy())
+           val time = if (v.id == tvResultado[0].id) 0 else 1
+           placar.pontua(time)
+           tvResultado[time].text = placar.pontos[time].toString()
+       }
+    }
+
+    fun  desfazer(v: View) {
+        if (pilhaPlacar.empty()) {
+            // TODO: mensagem de erro caso não haja movimento para desfazer
+            return
+        }
+        placar = pilhaPlacar.pop()
+        for (i in 0..1) {
+            tvResultado[i].text = placar.pontos[i].toString()
         }
     }
 
@@ -74,7 +75,6 @@ class PlacarActivity : AppCompatActivity() {
     }
 
     fun saveGame(v: View) {
-
         val sharedFilename = "PreviousGames"
         val sp: SharedPreferences = getSharedPreferences(sharedFilename, Context.MODE_PRIVATE)
         var edShared = sp.edit()
