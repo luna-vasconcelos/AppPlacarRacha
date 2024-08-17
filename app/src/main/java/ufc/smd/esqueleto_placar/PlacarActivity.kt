@@ -23,7 +23,6 @@ import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
 class PlacarActivity : AppCompatActivity() {
-
     lateinit var placar: Placar
     lateinit var tvResultado: Array<TextView>
     val pilhaPlacar = java.util.Stack<Placar>()
