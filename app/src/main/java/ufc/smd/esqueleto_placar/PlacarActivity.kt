@@ -24,29 +24,34 @@ import java.nio.charset.StandardCharsets
 class PlacarActivity : AppCompatActivity() {
     lateinit var placar:Placar
     lateinit var tvResultadoJogo: TextView
-    var game =0
+    var game1 = 0
+    var game2 = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
-        placar= getIntent().getExtras()?.getSerializable("placar") as Placar
-        tvResultadoJogo= findViewById(R.id.tvPlacar)
+        placar = getIntent().getExtras()?.getSerializable("placar") as Placar
+        tvResultadoJogo = findViewById(R.id.tvPlacar1)
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         tvNomePartida.text=placar.nome_partida
         ultimoJogos()
     }
 
-    fun alteraPlacar (v:View){
-        game++
-        if ((game % 2) != 0) {
-            placar.resultado = ""+game+" vs "+ (game-1)
-        }else{
-            placar.resultado = ""+(game-1)+" vs "+ (game-1)
-            vibrar(v)
+    fun alteraPlacar(v: View) {
+        when (v.id) {
+            R.id.tvPlacar1 -> {
+                game1++
+                placar.resultado = ""+game1+" x "+ game2
+            }
+            R.id.tvPlacar2 -> {
+                game2++
+                placar.resultado = ""+game1+" x "+ game2
+                vibrar(v)
+            }
         }
-        tvResultadoJogo.text=placar.resultado
+        tvResultadoJogo.text = placar.resultado
     }
-
 
     fun vibrar (v:View){
         val buzzer = this.getSystemService<Vibrator>()
@@ -96,9 +101,6 @@ class PlacarActivity : AppCompatActivity() {
         }
     }
 
-
-
-
     fun ultimoJogos () {
         val sharedFilename = "PreviousGames"
         val sp:SharedPreferences = getSharedPreferences(sharedFilename,Context.MODE_PRIVATE)
@@ -110,6 +112,5 @@ class PlacarActivity : AppCompatActivity() {
             var prevPlacar:Placar = oos.readObject() as Placar
             Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultado)
         }
-
     }
 }
