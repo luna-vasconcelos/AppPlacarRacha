@@ -23,15 +23,20 @@ import java.nio.charset.StandardCharsets
 
 class PlacarActivity : AppCompatActivity() {
     lateinit var placar:Placar
-    lateinit var tvResultadoJogo: TextView
+    lateinit var tvResultadoJogo1: TextView
+    lateinit var tvResultadoJogo2: TextView
     var game1 = 0
     var game2 = 0
+    var show_result = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
-        tvResultadoJogo = findViewById(R.id.tvPlacar1)
+
+        tvResultadoJogo1 = findViewById(R.id.tvPlacar1)
+        tvResultadoJogo2 = findViewById(R.id.tvPlacar2)
+
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         tvNomePartida.text=placar.nome_partida
@@ -43,14 +48,15 @@ class PlacarActivity : AppCompatActivity() {
             R.id.tvPlacar1 -> {
                 game1++
                 placar.resultado = ""+game1+" x "+ game2
+                tvResultadoJogo1.text = game1.toString()
             }
             R.id.tvPlacar2 -> {
                 game2++
                 placar.resultado = ""+game1+" x "+ game2
+                tvResultadoJogo2.text = game2.toString()
                 vibrar(v)
             }
         }
-        tvResultadoJogo.text = placar.resultado
     }
 
     fun vibrar (v:View){
@@ -66,7 +72,6 @@ class PlacarActivity : AppCompatActivity() {
          }
 
     }
-
 
     fun saveGame(v: View) {
 
