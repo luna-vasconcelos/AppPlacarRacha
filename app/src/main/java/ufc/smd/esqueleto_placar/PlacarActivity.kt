@@ -23,6 +23,7 @@ import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
 class PlacarActivity : AppCompatActivity() {
+
     lateinit var placar: Placar
     lateinit var tvResultado: Array<TextView>
     val pilhaPlacar = java.util.Stack<Placar>()
@@ -32,7 +33,7 @@ class PlacarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_placar)
         Log.d("d","ping")
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
-        tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
+        tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))        
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         //tvNomePartida.text=placar.nome_partida
@@ -73,9 +74,7 @@ class PlacarActivity : AppCompatActivity() {
 
     }
 
-
     fun saveGame(v: View) {
-
         val sharedFilename = "PreviousGames"
         val sp: SharedPreferences = getSharedPreferences(sharedFilename, Context.MODE_PRIVATE)
         var edShared = sp.edit()
