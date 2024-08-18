@@ -22,6 +22,12 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+
+
 class PlacarActivity : AppCompatActivity() {
 
     lateinit var placar: Placar
@@ -37,7 +43,9 @@ class PlacarActivity : AppCompatActivity() {
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         //tvNomePartida.text=placar.nome_partida
-        ultimoJogos()
+
+        val matchName = "match1"
+        ultimoJogos(matchName)
     }
 
     fun alteraPlacar(v: View) {
@@ -47,6 +55,7 @@ class PlacarActivity : AppCompatActivity() {
            placar.pontua(time)
            tvResultado[time].text = placar.pontos[time].toString()
        }
+        Log.v("placar_alterado",placar.resultado)
     }
 
     fun  desfazer(v: View) {
@@ -77,20 +86,37 @@ class PlacarActivity : AppCompatActivity() {
     fun saveGame(v: View) {
         val sharedFilename = "PreviousGames"
         val sp: SharedPreferences = getSharedPreferences(sharedFilename, Context.MODE_PRIVATE)
-        var edShared = sp.edit()
-        //Salvar o número de jogos já armazenados
-        var numMatches= sp.getInt("numberMatch",0) + 1
+        val edShared = sp.edit()
+
+        var numMatches = sp.getInt("numberMatch", 0) + 1
+        if (numMatches > 5) {
+            for (i in 1 until numMatches) {
+                val game = sp.getString("match${i + 1}", "")
+                val dateTime = sp.getString("matchDateTime${i + 1}", "")
+                edShared.putString("match$i", game)
+                edShared.putString("matchDateTime$i", dateTime)
+                }
+            numMatches = 5
+        }
+
         edShared.putInt("numberMatch", numMatches)
 
-        //Escrita em Bytes de Um objeto Serializável
-        var dt= ByteArrayOutputStream()
-        var oos = ObjectOutputStream(dt);
-        oos.writeObject(placar);
+        val date = Date()
+        val dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault())
+        val formattedDate = dateTimeFormat.format(date)
+        edShared.putString("matchDateTime$numMatches", formattedDate)
+        Log.d("DateTimeSave,test", "Saved date and time: $formattedDate")
 
-        //Salvar como "match"
-        edShared.putString("match"+numMatches, dt.toString(StandardCharsets.ISO_8859_1.name()))
-        edShared.commit() //Não esqueçam de comitar!!!
+        placar.resultadoLongo = "${placar.resultadoLongo} - $formattedDate"
 
+        val dt = ByteArrayOutputStream()
+        val oos = ObjectOutputStream(dt)
+        oos.writeObject(placar)
+
+        Log.v("placar_pro_save",placar.resultadoLongo)
+
+        edShared.putString("match$numMatches", dt.toString(StandardCharsets.ISO_8859_1.name()))
+        edShared.commit()
     }
 
     fun lerUltimosJogos(v: View){
@@ -106,16 +132,23 @@ class PlacarActivity : AppCompatActivity() {
         }
     }
 
-    fun ultimoJogos () {
+    fun ultimoJogos (matchName: String) {
         val sharedFilename = "PreviousGames"
         val sp:SharedPreferences = getSharedPreferences(sharedFilename,Context.MODE_PRIVATE)
-        var matchStr:String=sp.getString("match1","").toString()
-       // Log.v("PDM22", matchStr)
-        if (matchStr.length >=1){
-            var dis = ByteArrayInputStream(matchStr.toByteArray(Charsets.ISO_8859_1))
-            var oos = ObjectInputStream(dis)
-            var prevPlacar:Placar = oos.readObject() as Placar
-            Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultado)
+
+        val matchStr:String = sp.getString(matchName, "").toString()
+        Log.v("Jogo do histórico:", matchStr)
+
+        if (matchStr.isNotEmpty()) {
+            val dis = ByteArrayInputStream(matchStr.toByteArray(Charsets.ISO_8859_1))
+            val oos = ObjectInputStream(dis)
+            val prevPlacar: Placar = oos.readObject() as Placar
+
+            // TODO: passar o último jogo pra UI também
+//            tvResultado[0].text = prevPlacar.pontos[0].toString()
+//            tvResultado[1].text = prevPlacar.pontos[1].toString()
+//            tvNomePartida.text = prevPlacar.nome_partida
+            Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultadoLongo)
         }
     }
 }
