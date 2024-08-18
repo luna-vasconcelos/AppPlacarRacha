@@ -15,6 +15,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.getSystemService
 import data.Placar
+import data.strategy.EndgameStrategy
+import data.strategy.NormalStrategy
+import data.strategy.SupertieStrategy
+import data.strategy.TiebreakerStrategy
 import org.w3c.dom.Text
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -29,7 +33,6 @@ import java.util.Locale
 
 
 class PlacarActivity : AppCompatActivity() {
-
     lateinit var placar: Placar
     lateinit var tvResultado: Array<TextView>
     val pilhaPlacar = java.util.Stack<Placar>()
@@ -43,9 +46,39 @@ class PlacarActivity : AppCompatActivity() {
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         //tvNomePartida.text=placar.nome_partida
-
         val matchName = "match1"
         ultimoJogos(matchName)
+
+        updatePlacar()
+    }
+
+    fun updatePlacar() {
+        val tvGames: Array<TextView> = arrayOf(findViewById(R.id.tvGames1), findViewById(R.id.tvGames2))
+        val tvSets: Array<TextView> = arrayOf(findViewById(R.id.tvSets1), findViewById(R.id.tvSets2))
+        for (i in 0..1) {
+            tvGames[i].text = placar.games[i].toString()
+            tvSets[i].text = placar.sets[i].toString()
+            tvResultado[i].text = placar.pontos[i].toString()
+        }
+        val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
+
+        when {
+            placar.regras is NormalStrategy -> {
+                tvNomePartida.text = "normal"
+            }
+            placar.regras is TiebreakerStrategy -> {
+                tvNomePartida.text = "empate"
+            }
+            placar.regras is SupertieStrategy -> {
+                tvNomePartida.text = "supertie"
+            }
+            placar.regras is EndgameStrategy ->{
+                tvNomePartida.text = "acabou"
+            }
+            else -> {
+                tvNomePartida.text = "bug"
+            }
+        }
     }
 
     fun alteraPlacar(v: View) {
@@ -56,6 +89,7 @@ class PlacarActivity : AppCompatActivity() {
            tvResultado[time].text = placar.pontos[time].toString()
        }
         Log.v("placar_alterado",placar.resultado)
+        updatePlacar()
     }
 
     fun  desfazer(v: View) {
@@ -67,6 +101,7 @@ class PlacarActivity : AppCompatActivity() {
         for (i in 0..1) {
             tvResultado[i].text = placar.pontos[i].toString()
         }
+        updatePlacar()
     }
 
     fun vibrar (v:View){
