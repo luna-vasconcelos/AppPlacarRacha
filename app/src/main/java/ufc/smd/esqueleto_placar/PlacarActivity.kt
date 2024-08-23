@@ -71,17 +71,16 @@ class PlacarActivity : AppCompatActivity() {
                 tvNomePartida.text = "bug"
             }
         }
-
     }
 
     fun alteraPlacar(v: View) {
-       if (v is TextView) {
+       if (v is TextView && !placar.jogoFinalizado()) {
            pilhaPlacar.push(placar.copy())
            val time = if (v.id == tvResultado[0].id) 0 else 1
            placar.pontua(time)
            tvResultado[time].text = placar.pontos[time].toString()
+           updatePlacar()
        }
-        updatePlacar()
     }
 
     fun  desfazer(v: View) {
