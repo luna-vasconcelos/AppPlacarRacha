@@ -3,6 +3,16 @@ package data.strategy
 import data.Placar
 
 class NormalStrategy : ScoringStrategy {
+    override fun getPontos(placar: Placar, time: Int): String {
+        return when(placar.pontos[time]){
+            0 -> "00"
+            1 -> "15"
+            2 -> "30"
+            3 -> "40"
+            else -> ""
+        }
+    }
+
     override fun pontua(placar: Placar, time: Int) : ScoringStrategy {
         placar.pontos[time]++;
 

@@ -55,16 +55,16 @@ class PlacarActivity : AppCompatActivity() {
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
 
         when {
-            placar.regras is NormalStrategy -> {
+            placar.regra is NormalStrategy -> {
                 tvNomePartida.text = "normal"
             }
-            placar.regras is TiebreakerStrategy -> {
+            placar.regra is TiebreakerStrategy -> {
                 tvNomePartida.text = "empate"
             }
-            placar.regras is SupertieStrategy -> {
+            placar.regra is SupertieStrategy -> {
                 tvNomePartida.text = "supertie"
             }
-            placar.regras is EndgameStrategy ->{
+            placar.regra is EndgameStrategy ->{
                 tvNomePartida.text = "acabou"
             }
             else -> {

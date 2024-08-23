@@ -3,6 +3,10 @@ package data.strategy
 import data.Placar
 
 class TiebreakerStrategy : ScoringStrategy {
+    override fun getPontos(placar: Placar, time: Int): String {
+        return String.format("%02d",placar.pontos[time])
+    }
+
     override fun pontua(placar: Placar, time: Int): ScoringStrategy {
         placar.pontos[time]++;
 
