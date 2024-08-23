@@ -11,6 +11,7 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
     var pontos: Array<Int> = arrayOf(0, 0)
     var games: Array<Int> = arrayOf(0, 0)
     var sets: Array<Int> = arrayOf(0, 0)
+    var ladosTrocados: Int = 0
 
     fun jogoFinalizado(): Boolean {
         return regra is EndgameStrategy
@@ -34,6 +35,7 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
         answ.nomeJogadores = nomeJogadores.copyOf()
         answ.games = games.copyOf()
         answ.sets = sets.copyOf()
+        answ.ladosTrocados = ladosTrocados
         return answ
     }
 

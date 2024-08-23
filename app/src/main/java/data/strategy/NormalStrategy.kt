@@ -23,8 +23,9 @@ class NormalStrategy : ScoringStrategy {
         placar.pontos = arrayOf(0, 0)
         placar.games[time]++
 
-        // No risk of tiebreaker
-        if (placar.games[time] < placar.gamesToSet) return  this
+        // Change ends
+        if ((placar.games[time] + placar.games[1-time])%2 == 1)
+            placar.ladosTrocados = 1 - placar.ladosTrocados
 
         // Wins set regularly
         if(placar.games[time]-placar.games[1-time] >= 2) return updateSets(placar, time)
