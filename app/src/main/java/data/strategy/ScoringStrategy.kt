@@ -19,5 +19,6 @@ fun updateSets(placar: Placar, time: Int): ScoringStrategy {
     }
 }
 interface ScoringStrategy : Serializable {
+    fun getPontos(placar: Placar, time: Int): String
     fun pontua(placar: Placar, time: Int): ScoringStrategy
 }

@@ -40,9 +40,9 @@ class PlacarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
-        Log.d("d","ping")
+
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
-        tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))        
+        tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         //tvNomePartida.text=placar.nome_partida
@@ -57,21 +57,21 @@ class PlacarActivity : AppCompatActivity() {
         for (i in 0..1) {
             tvGames[i].text = placar.games[i].toString()
             tvSets[i].text = placar.sets[i].toString()
-            tvResultado[i].text = placar.pontos[i].toString()
+            tvResultado[i].text = placar.getPontos(i)
         }
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
 
         when {
-            placar.regras is NormalStrategy -> {
+            placar.regra is NormalStrategy -> {
                 tvNomePartida.text = "normal"
             }
-            placar.regras is TiebreakerStrategy -> {
+            placar.regra is TiebreakerStrategy -> {
                 tvNomePartida.text = "empate"
             }
-            placar.regras is SupertieStrategy -> {
+            placar.regra is SupertieStrategy -> {
                 tvNomePartida.text = "supertie"
             }
-            placar.regras is EndgameStrategy ->{
+            placar.regra is EndgameStrategy ->{
                 tvNomePartida.text = "acabou"
             }
             else -> {
@@ -81,11 +81,11 @@ class PlacarActivity : AppCompatActivity() {
     }
 
     fun alteraPlacar(v: View) {
-       if (v is TextView) {
+       if (v is TextView && !placar.jogoFinalizado()) {
            pilhaPlacar.push(placar.copy())
            val time = if (v.id == tvResultado[0].id) 0 else 1
            placar.pontua(time)
-           tvResultado[time].text = placar.pontos[time].toString()
+           updatePlacar()
        }
         Log.v("placar_alterado",placar.resultado)
         updatePlacar()
