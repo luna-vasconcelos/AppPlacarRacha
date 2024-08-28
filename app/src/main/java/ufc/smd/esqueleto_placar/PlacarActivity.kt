@@ -64,18 +64,23 @@ class PlacarActivity : AppCompatActivity() {
         when {
             placar.regra is NormalStrategy -> {
                 tvNomePartida.text = "normal"
+                placar.resultado = "normal"
             }
             placar.regra is TiebreakerStrategy -> {
                 tvNomePartida.text = "empate"
+                placar.resultado = "empate"
             }
             placar.regra is SupertieStrategy -> {
                 tvNomePartida.text = "supertie"
+                placar.resultado = "supertie"
             }
             placar.regra is EndgameStrategy ->{
                 tvNomePartida.text = "acabou"
+                placar.resultado = "acabou"
             }
             else -> {
                 tvNomePartida.text = "bug"
+                placar.resultado = "bug"
             }
         }
     }
@@ -103,27 +108,13 @@ class PlacarActivity : AppCompatActivity() {
         updatePlacar()
     }
 
-    fun vibrar (v:View){
-        val buzzer = this.getSystemService<Vibrator>()
-         val pattern = longArrayOf(0, 200, 100, 300)
-         buzzer?.let {
-             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                 buzzer.vibrate(VibrationEffect.createWaveform(pattern, -1))
-             } else {
-                 //deprecated in API 26
-                 buzzer.vibrate(pattern, -1)
-             }
-         }
-
-    }
-
     fun saveGame(v: View) {
         val sharedFilename = "PreviousGames"
         val sp: SharedPreferences = getSharedPreferences(sharedFilename, Context.MODE_PRIVATE)
         val edShared = sp.edit()
 
         var numMatches = sp.getInt("numberMatch", 0) + 1
-        if (numMatches > 5) {
+        if (numMatches > 10) {
             for (i in 1 until numMatches) {
                 val game = sp.getString("match${i + 1}", "")
                 val dateTime = sp.getString("matchDateTime${i + 1}", "")

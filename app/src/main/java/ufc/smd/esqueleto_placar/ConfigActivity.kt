@@ -12,15 +12,10 @@ import android.widget.Switch
 import data.Placar
 
 class ConfigActivity : AppCompatActivity() {
-    var placar: Placar= Placar("Jogo sem Config","0x0", "20/05/20 10h",false)
+    var placar: Placar= Placar("Jogo sem Config","", "",false)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
-       // placar= getIntent().getExtras()?.getSerializable("placar") as Placar
-        //Log.v("PDM22",placar.nome_partida)
-        //Log.v("PDM22",placar.has_timer.toString())
-
-
         openConfig()
         initInterface()
 
