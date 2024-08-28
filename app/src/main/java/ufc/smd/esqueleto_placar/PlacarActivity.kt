@@ -47,7 +47,7 @@ class PlacarActivity : AppCompatActivity() {
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         //tvNomePartida.text=placar.nome_partida
         val matchName = "match1"
-        ultimoJogos(matchName)
+//        ultimoJogos()
         updatePlacar()
     }
 

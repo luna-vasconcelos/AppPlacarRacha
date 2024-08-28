@@ -27,25 +27,25 @@ class PreviousGamesActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         // O ArrayList de Placares
-        val data = readPLacarDataSharedPreferences()
-        // val date = Calendar.getInstance().time
-        // var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
-        // val data_hora = dateTimeFormat.format(date)
-
-
-        //Criando 10 Placares
-        //   for (i in 1..10) {
-        //     val date = Calendar.getInstance().time
-        //   var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
-        // val data_hora = dateTimeFormat.format(date)
-        //data.add(Placar("Jogo "+i,""+i+"x"+i," O jogo foi 4x4 em "+data_hora+"h",true))
-        //}
-
-        // ArrayList enviado ao Adapter
-        val adapter = CustomAdapter(data)
-
-        // Setando o Adapter no Recyclerview
-        recyclerview.adapter = adapter
+//        val data = readPLacarDataSharedPreferences()
+//        // val date = Calendar.getInstance().time
+//        // var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
+//        // val data_hora = dateTimeFormat.format(date)
+//
+//
+//        //Criando 10 Placares
+//        //   for (i in 1..10) {
+//        //     val date = Calendar.getInstance().time
+//        //   var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
+//        // val data_hora = dateTimeFormat.format(date)
+//        //data.add(Placar("Jogo "+i,""+i+"x"+i," O jogo foi 4x4 em "+data_hora+"h",true))
+//        //}
+//
+//        // ArrayList enviado ao Adapter
+//        val adapter = CustomAdapter(data)
+//
+//        // Setando o Adapter no Recyclerview
+//        recyclerview.adapter = adapter
 
     }
 
