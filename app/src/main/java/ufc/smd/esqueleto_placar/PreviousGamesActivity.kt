@@ -27,25 +27,16 @@ class PreviousGamesActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         // O ArrayList de Placares
-//        val data = readPLacarDataSharedPreferences()
-//        // val date = Calendar.getInstance().time
-//        // var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
-//        // val data_hora = dateTimeFormat.format(date)
-//
-//
-//        //Criando 10 Placares
-//        //   for (i in 1..10) {
-//        //     val date = Calendar.getInstance().time
-//        //   var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
-//        // val data_hora = dateTimeFormat.format(date)
-//        //data.add(Placar("Jogo "+i,""+i+"x"+i," O jogo foi 4x4 em "+data_hora+"h",true))
-//        //}
-//
-//        // ArrayList enviado ao Adapter
-//        val adapter = CustomAdapter(data)
-//
-//        // Setando o Adapter no Recyclerview
-//        recyclerview.adapter = adapter
+        val data = readPLacarDataSharedPreferences()
+        // val date = Calendar.getInstance().time
+        // var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
+        // val data_hora = dateTimeFormat.format(date)
+
+        // ArrayList enviado ao Adapter
+        val adapter = CustomAdapter(data)
+
+        // Setando o Adapter no Recyclerview
+        recyclerview.adapter = adapter
 
     }
 
@@ -69,38 +60,10 @@ class PreviousGamesActivity : AppCompatActivity() {
 
                     var placar: Placar = obi.readObject() as Placar
                     data.add(placar)
-                    //Log.v("PDM", "match"+i+" :"+aux)
                     Log.v("PDM", "Placar: " + placar.nome_partida + " Pontuação:" + placar.pontos + " Res:" + placar.resultadoLongo)
                 }
             }
         }
         return data
-    }
-
-    fun readPLacarData() {
-        Log.v("PDM", "Lendo o Shared Preferences")
-        val sharedFileName = "PreviousGames"
-        var aux: String
-        var sp: SharedPreferences = getSharedPreferences(sharedFileName, Context.MODE_PRIVATE)
-        if (sp != null) {
-            var numMatches = sp.getInt("numberMatch", 0)
-            Log.v("PDM", "numMatchs:" + numMatches)
-            for (i in 1..numMatches) {
-                aux = sp.getString("match" + i, "vazio")!!
-                if (!aux.equals("vazio")) {
-
-                    var bis: ByteArrayInputStream
-                    bis = ByteArrayInputStream(aux.toByteArray(Charsets.ISO_8859_1))
-                    var obi: ObjectInputStream
-                    obi = ObjectInputStream(bis)
-
-                    var placar: Placar = obi.readObject() as Placar
-
-                    //Log.v("PDM", "match"+i+" :"+aux)
-                    Log.v("PDM", "Placar: " + placar.nome_partida + " Res:" + placar.resultadoLongo)
-                }
-            }
-        }
-
     }
 }
