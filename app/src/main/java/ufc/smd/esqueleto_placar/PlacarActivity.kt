@@ -48,7 +48,6 @@ class PlacarActivity : AppCompatActivity() {
         //tvNomePartida.text=placar.nome_partida
         val matchName = "match1"
         ultimoJogos(matchName)
-
         updatePlacar()
     }
 
