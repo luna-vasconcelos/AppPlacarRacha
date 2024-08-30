@@ -9,10 +9,10 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Switch
-import data.Placar
+import ufc.smd.esqueleto_placar.data.Placar
 
 class ConfigActivity : AppCompatActivity() {
-    var placar: Placar= Placar("Jogo sem Config","", "",false)
+    var placar: Placar = Placar("Jogo sem Config","", "",false)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)

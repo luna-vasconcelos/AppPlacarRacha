@@ -1,6 +1,6 @@
 package ufc.smd.esqueleto_placar
 
-import adapters.CustomAdapter
+import ufc.smd.esqueleto_placar.adapters.CustomAdapter
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import data.Placar
+import ufc.smd.esqueleto_placar.data.Placar
 import java.io.ByteArrayInputStream
 import java.io.ObjectInputStream
 import java.text.SimpleDateFormat
@@ -20,6 +20,13 @@ class PreviousGamesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_previous_games)
 
+//        // Clear the SharedPreferences data
+//        // Snnipet útil para erro de seriarilazable data incompatível (quando muda no Placar)
+//        val sp = getSharedPreferences("PreviousGames", Context.MODE_PRIVATE)
+//        val editor = sp.edit()
+//        editor.clear()
+//        editor.apply()
+
         // Trazendo o Recycler View
         val recyclerview = findViewById<RecyclerView>(R.id.rcPreviousGames)
 
@@ -28,16 +35,12 @@ class PreviousGamesActivity : AppCompatActivity() {
 
         // O ArrayList de Placares
         val data = readPLacarDataSharedPreferences()
-        // val date = Calendar.getInstance().time
-        // var dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault())
-        // val data_hora = dateTimeFormat.format(date)
 
         // ArrayList enviado ao Adapter
         val adapter = CustomAdapter(data)
 
         // Setando o Adapter no Recyclerview
         recyclerview.adapter = adapter
-
     }
 
     fun readPLacarDataSharedPreferences(): ArrayList<Placar> {

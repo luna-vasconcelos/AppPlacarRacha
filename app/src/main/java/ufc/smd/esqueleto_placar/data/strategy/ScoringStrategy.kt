@@ -1,5 +1,5 @@
-package data.strategy
-import data.Placar
+package ufc.smd.esqueleto_placar.data.strategy
+import ufc.smd.esqueleto_placar.data.Placar
 import java.io.Serializable
 
 fun updateSets(placar: Placar, time: Int): ScoringStrategy {

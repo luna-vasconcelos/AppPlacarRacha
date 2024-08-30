@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="120dp"
     android:layout_margin="10dp"
     app:cardElevation="6dp">
 
@@ -17,7 +17,7 @@
             android:id="@+id/imageview"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/ic_action_name" />
+            app:srcCompat="@drawable/ic_racket" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,6 +37,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Resultado do Jogo"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDataJogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Data do Jogo"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTimeVencedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vencedor do Jogo"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

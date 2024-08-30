@@ -14,11 +14,11 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.getSystemService
-import data.Placar
-import data.strategy.EndgameStrategy
-import data.strategy.NormalStrategy
-import data.strategy.SupertieStrategy
-import data.strategy.TiebreakerStrategy
+import ufc.smd.esqueleto_placar.data.Placar
+import ufc.smd.esqueleto_placar.data.strategy.EndgameStrategy
+import ufc.smd.esqueleto_placar.data.strategy.NormalStrategy
+import ufc.smd.esqueleto_placar.data.strategy.SupertieStrategy
+import ufc.smd.esqueleto_placar.data.strategy.TiebreakerStrategy
 import org.w3c.dom.Text
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -74,9 +74,21 @@ class PlacarActivity : AppCompatActivity() {
                 tvNomePartida.text = "supertie"
                 placar.resultado = "supertie"
             }
-            placar.regra is EndgameStrategy ->{
+            placar.regra is EndgameStrategy -> {
                 tvNomePartida.text = "acabou"
                 placar.resultado = "acabou"
+
+                // Updatear o time vencedor -> Placeholder
+                val winningTeam = if (placar.sets[0] > placar.sets[1]) {
+                    "Team 1" // Placeholder
+                } else {
+                    "Team 2" // Placeholder
+                }
+                placar.timeVencedor = winningTeam
+
+//                // Update the UI to show the winning team
+//                val tvNomePartida = findViewById(R.id.tvNomePartida2) as TextView
+//                tvNomePartida.text = winningTeam
             }
             else -> {
                 tvNomePartida.text = "bug"
@@ -127,18 +139,16 @@ class PlacarActivity : AppCompatActivity() {
         edShared.putInt("numberMatch", numMatches)
 
         val date = Date()
-        val dateTimeFormat = SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault())
+        val dateTimeFormat = SimpleDateFormat("dd/MM/yy - HH:mm", Locale.getDefault())
         val formattedDate = dateTimeFormat.format(date)
         edShared.putString("matchDateTime$numMatches", formattedDate)
-        Log.d("DateTimeSave,test", "Saved date and time: $formattedDate")
-
-        placar.resultadoLongo = "${placar.resultadoLongo} - $formattedDate"
+        placar.dataJogo = formattedDate
 
         val dt = ByteArrayOutputStream()
         val oos = ObjectOutputStream(dt)
         oos.writeObject(placar)
 
-        Log.v("placar_pro_save",placar.resultadoLongo)
+        Log.v("placar_pro_save",placar.resultadoLongo + placar.dataJogo)
 
         edShared.putString("match$numMatches", dt.toString(StandardCharsets.ISO_8859_1.name()))
         edShared.commit()
@@ -152,7 +162,7 @@ class PlacarActivity : AppCompatActivity() {
         if (meuObjString.length >=1) {
             var dis = ByteArrayInputStream(meuObjString.toByteArray(Charsets.ISO_8859_1))
             var oos = ObjectInputStream(dis)
-            var placarAntigo:Placar=oos.readObject() as Placar
+            var placarAntigo: Placar =oos.readObject() as Placar
             Log.v("SMD26",placar.resultado)
         }
     }

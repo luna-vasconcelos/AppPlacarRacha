@@ -1,8 +1,8 @@
-package data
+package ufc.smd.esqueleto_placar.data
 
-import data.strategy.EndgameStrategy
-import data.strategy.NormalStrategy
-import data.strategy.ScoringStrategy
+import ufc.smd.esqueleto_placar.data.strategy.EndgameStrategy
+import ufc.smd.esqueleto_placar.data.strategy.NormalStrategy
+import ufc.smd.esqueleto_placar.data.strategy.ScoringStrategy
 import java.io.Serializable
 
 data class Placar(var nome_partida: String, var resultado: String, var resultadoLongo: String, var has_timer: Boolean, var gamesToSet: Int = 6, var totalSets: Int = 5) : Serializable {
@@ -12,6 +12,8 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
     var games: Array<Int> = arrayOf(0, 0)
     var sets: Array<Int> = arrayOf(0, 0)
     var ladosTrocados: Int = 0
+    var dataJogo: String = ""
+    var timeVencedor: String = ""
 
     fun jogoFinalizado(): Boolean {
         return regra is EndgameStrategy
@@ -28,7 +30,7 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
         }
     }
 
-    fun copy() : Placar{
+    fun copy() : Placar {
         var answ: Placar = Placar(nome_partida, resultado, resultadoLongo, has_timer)
         answ.regra = regra
         answ.pontos = pontos.copyOf()

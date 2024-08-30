@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import data.Placar
+import ufc.smd.esqueleto_placar.data.Placar
 
 class MainActivity : AppCompatActivity() {
 
