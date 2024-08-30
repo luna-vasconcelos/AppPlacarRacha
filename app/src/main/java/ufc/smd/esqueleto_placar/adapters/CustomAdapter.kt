@@ -1,4 +1,4 @@
-package adapters
+package ufc.smd.esqueleto_placar.adapters
 
 import android.text.Layout
 import android.util.Log
@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import data.Placar
+import ufc.smd.esqueleto_placar.data.Placar
 import ufc.smd.esqueleto_placar.R
 
 class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -30,6 +30,8 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
         val imageView: ImageView = ItemView.findViewById(R.id.imageview)
         val tvNomePartida: TextView = ItemView.findViewById(R.id.tvNomePartida)
         val tvResultadoJogo: TextView = ItemView.findViewById(R.id.tvResultadoJogo)
+        val tvDataJogo: TextView = ItemView.findViewById(R.id.tvDataJogo) // Add reference to game date TextView
+        val tvTimeVencedor: TextView = ItemView.findViewById(R.id.tvTimeVencedor) // Add reference to winning team TextView
         val lnCell: LinearLayout = ItemView.findViewById(R.id.lnCell)
     }
 
@@ -40,7 +42,9 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
 
         //alimentando os elementos a partir do objeto placar
         holder.tvNomePartida.text = placarAnterior.nome_partida
-        holder.tvResultadoJogo.text = placarAnterior.resultado
+        holder.tvResultadoJogo.text = "${placarAnterior.sets[0]} - ${placarAnterior.sets[1]}"
+        holder.tvDataJogo.text = placarAnterior.dataJogo
+        holder.tvTimeVencedor.text = placarAnterior.timeVencedor
 
         holder.lnCell.setOnClickListener{
             val duration= Snackbar.LENGTH_LONG
@@ -56,6 +60,4 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
     override fun getItemCount(): Int {
         return mList.size
     }
-
-
 }

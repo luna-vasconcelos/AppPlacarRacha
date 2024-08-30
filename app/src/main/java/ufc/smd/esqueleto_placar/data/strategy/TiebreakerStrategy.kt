@@ -1,8 +1,8 @@
-package data.strategy
+package ufc.smd.esqueleto_placar.data.strategy
 
-import data.Placar
+import ufc.smd.esqueleto_placar.data.Placar
 
-class SupertieStrategy : ScoringStrategy {
+class TiebreakerStrategy : ScoringStrategy {
     override fun getPontos(placar: Placar, time: Int): String {
         return String.format("%02d",placar.pontos[time])
     }
@@ -14,8 +14,8 @@ class SupertieStrategy : ScoringStrategy {
         if ((placar.pontos[time] + placar.pontos[1-time])%5 == 1)
             placar.ladosTrocados = 1 - placar.ladosTrocados
 
-        if (placar.pontos[time] < 10 || placar.pontos[time] - placar.pontos[1-time] < 2) return this
+        if (placar.pontos[time] < 7 || placar.pontos[time] - placar.pontos[1-time] < 2) return this
 
-        return EndgameStrategy()
+        return updateSets(placar, time)
     }
 }

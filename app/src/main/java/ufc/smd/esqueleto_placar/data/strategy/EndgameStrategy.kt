@@ -1,8 +1,8 @@
-package data.strategy
+package ufc.smd.esqueleto_placar.data.strategy
 
-import data.Placar
+import ufc.smd.esqueleto_placar.data.Placar
 
-class EndgameStrategy : ScoringStrategy{
+class EndgameStrategy : ScoringStrategy {
     override fun getPontos(placar: Placar, time: Int): String {
         return ""
     }

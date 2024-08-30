@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
-import data.UIEducacionalPermissao
+import ufc.smd.esqueleto_placar.data.UIEducacionalPermissao
 
 class PermissionActivity : AppCompatActivity(), UIEducacionalPermissao.NoticeDialogListener {
 
