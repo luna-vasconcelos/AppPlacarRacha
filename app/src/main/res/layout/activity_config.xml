@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ConfigActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/background" />
     <EditText
         android:id="@+id/editTextGameName"
         android:layout_width="wrap_content"
@@ -41,6 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextGameName" />
 
     <Button
+        style="@style/Buttons"
         android:id="@+id/btInitGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
