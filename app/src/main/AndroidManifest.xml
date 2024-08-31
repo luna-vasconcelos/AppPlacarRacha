@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Esqueleto_Placar">
         <activity
-            android:name=".PermissionActivity"
-            android:exported="false" />
-        <activity
             android:name=".PlacarActivity"
             android:exported="false" />
         <activity
