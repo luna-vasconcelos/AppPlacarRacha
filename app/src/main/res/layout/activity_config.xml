@@ -16,6 +16,19 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <EditText
+        android:id="@+id/team2"
+        style="@style/editText"
+        android:layout_width="202dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Time B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txSeparador" />
+
+    <EditText
         android:id="@+id/Player2TB"
         style="@style/editText"
         android:layout_width="201dp"
@@ -36,7 +49,7 @@
         style="@style/editText"
         android:layout_width="200dp"
         android:layout_height="36dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:background="@color/YellowLight"
         android:ems="10"
         android:inputType="textPersonName"
@@ -44,8 +57,9 @@
         android:paddingBottom="2sp"
         android:text="Jogador 1 - Time B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txSeparador" />
+        app:layout_constraintTop_toBottomOf="@+id/team2" />
 
     <EditText
         android:id="@+id/editTextGameName"
@@ -65,11 +79,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNomePartida" />
 
     <TextView
-        style="@style/textView"
         android:id="@+id/tvNomePartida"
+        style="@style/textView"
         android:layout_width="293dp"
         android:layout_height="38dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:text="Configurações da Partida"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -92,10 +106,10 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextGameName" />
 
     <EditText
-        android:id="@+id/Player1TA"
+        android:id="@+id/Player1T1"
         style="@style/editText"
-        android:layout_width="200dp"
-        android:layout_height="36dp"
+        android:layout_width="201dp"
+        android:layout_height="39dp"
         android:layout_marginTop="20dp"
         android:background="@color/YellowLight"
         android:ems="10"
@@ -104,11 +118,12 @@
         android:paddingBottom="2sp"
         android:text="Jogador 1 - Time A"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvJogadores" />
+        app:layout_constraintTop_toBottomOf="@+id/team1" />
 
     <EditText
-        android:id="@+id/Player2TA"
+        android:id="@+id/Player2T1"
         style="@style/editText"
         android:layout_width="201dp"
         android:layout_height="38dp"
@@ -121,7 +136,7 @@
         android:text="Jogador 2 - Time A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Player1TA" />
+        app:layout_constraintTop_toBottomOf="@+id/Player1T1" />
 
     <TextView
         android:id="@+id/txSeparador"
@@ -134,13 +149,13 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Player2TA" />
+        app:layout_constraintTop_toBottomOf="@+id/Player2T1" />
 
     <Switch
         android:id="@+id/swTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Cronômetro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,5 +174,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swTimer" />
+
+    <EditText
+        android:id="@+id/team1"
+        style="@style/editText"
+        android:layout_width="202dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Time A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJogadores" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
