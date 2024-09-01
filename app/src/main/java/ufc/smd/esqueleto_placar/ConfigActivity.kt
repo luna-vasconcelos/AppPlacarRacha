@@ -16,7 +16,7 @@ class ConfigActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
-        openConfig()
+        //openConfig()
         initInterface()
 
     }
@@ -39,7 +39,7 @@ class ConfigActivity : AppCompatActivity() {
     }
     fun initInterface(){
         val tv= findViewById<EditText>(R.id.editTextGameName)
-        tv.setText(placar.nome_partida)
+        //tv.setText(placar.nome_partida)
         val sw= findViewById<Switch>(R.id.swTimer)
         sw.isChecked=placar.has_timer
     }
