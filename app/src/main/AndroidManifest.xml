@@ -19,6 +19,9 @@
             android:name=".PreviousGamesActivity"
             android:exported="false" />
         <activity
+            android:name=".GameDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ConfigActivity"
             android:exported="false" />
         <activity

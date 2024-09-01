@@ -48,7 +48,16 @@ class PlacarActivity : AppCompatActivity() {
         //tvNomePartida.text=placar.nome_partida
         val matchName = "match1"
 //        ultimoJogos()
+
+        if (placar.has_timer) {
+            startTimer()
+        }
+
         updatePlacar()
+    }
+
+    private fun startTimer() {
+        TODO("Not yet implemented")
     }
 
     fun updatePlacar() {
