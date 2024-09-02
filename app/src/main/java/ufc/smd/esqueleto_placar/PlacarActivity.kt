@@ -49,9 +49,9 @@ class PlacarActivity : AppCompatActivity() {
         tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
 
         val tvTimeA = findViewById<TextView>(R.id.tvTimeA)
-        tvTimeA.text = placar.timeA
+        tvTimeA?.text = placar.timeA
         val tvTimeB = findViewById<TextView>(R.id.tvTimeB)
-        tvTimeB.text = placar.timeB
+        tvTimeB?.text = placar.timeB
 
         updatePlacar()
 
@@ -79,7 +79,7 @@ class PlacarActivity : AppCompatActivity() {
 
     fun updatePlacar() {
         val tvNomePartida = findViewById(R.id.tvNomePartida2) as TextView
-        val tvGames: Array<TextView> = arrayOf(findViewById(R.id.tvSets1), findViewById(R.id.tvSets2))
+        val tvGames: Array<TextView> = arrayOf(findViewById(R.id.tvGames1), findViewById(R.id.tvGames2))
         val tvSets: Array<TextView> = arrayOf(findViewById(R.id.tvSets1), findViewById(R.id.tvSets2))
         val tvNomeJogadores: Array<TextView?> = arrayOf(findViewById(R.id.tvNomeJogador1),findViewById(R.id.tvNomeJogador2),findViewById(R.id.tvNomeJogador3),findViewById(R.id.tvNomeJogador4))
 
@@ -92,6 +92,14 @@ class PlacarActivity : AppCompatActivity() {
             
             tvNomeJogadores[2*i]?.text = placar.nomeJogadores[i].first
             tvNomeJogadores[2*i+1]?.text = placar.nomeJogadores[i].second
+        }
+
+        placar.resultado = when {
+            placar.regra is NormalStrategy -> "normal"
+            placar.regra is TiebreakerStrategy -> "empate"
+            placar.regra is SupertieStrategy -> "supertie"
+            placar.regra is EndgameStrategy -> "acabou"
+            else -> "bug"
         }
 
     }
