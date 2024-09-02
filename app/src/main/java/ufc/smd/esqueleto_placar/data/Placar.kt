@@ -26,8 +26,10 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
     }
 
     fun pontua(time: Int) {
+        if(jogoFinalizado()) return
         regra = regra.pontua(this, time)
         if(jogoFinalizado()) {
+            timeVencedor = if(time==0) timeA else timeB
             resultadoLongo = String.format("%s e %s venceram a partida!", nomeJogadores[time].first, nomeJogadores[time].second)
         }
     }

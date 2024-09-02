@@ -1,0 +1,12 @@
+<!-- res/drawable/border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color (if needed) -->
+    <solid android:color="#FFFFFF" />  <!-- Optional: Background color -->
+
+    <!-- Border settings -->
+    <stroke
+        android:width="2dp"
+        android:color="#FF0000" /> <!-- Red border color with 2dp width -->
+
+    <!-- Optional: Corner radius --> />
+</shape>
