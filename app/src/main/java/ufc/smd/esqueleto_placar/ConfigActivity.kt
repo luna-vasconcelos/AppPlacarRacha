@@ -26,35 +26,49 @@ class ConfigActivity : AppCompatActivity() {
         var edShared = sp.edit()
 
         edShared.putString("matchname",placar.nome_partida)
+
+        edShared.putString("teamA",placar.timeA)
+        edShared.putString("teamB",placar.timeB)
+
         edShared.putBoolean("has_timer",placar.has_timer)
+
         edShared.commit()
     }
     fun openConfig()
     {
         val sharedFilename = "configPlacar"
         val sp:SharedPreferences = getSharedPreferences(sharedFilename,Context.MODE_PRIVATE)
-        placar.nome_partida=sp.getString("matchname","Jogo Padrão").toString()
+        placar.nome_partida = sp.getString("matchname","Jogo Padrão").toString()
+        placar.timeA = sp.getString("teamA","TimeA").toString()
+        placar.timeB = sp.getString("teamB","TimeB").toString()
         placar.has_timer=sp.getBoolean("has_timer",false)
-
     }
     fun initInterface(){
-        val tv= findViewById<EditText>(R.id.editTextGameName)
+        val tv = findViewById<EditText>(R.id.editTextGameName)
         tv.setText(placar.nome_partida)
-        val sw= findViewById<Switch>(R.id.swTimer)
+        val teamA = findViewById<EditText>(R.id.team1)
+        teamA.setText(placar.timeA)
+        val teamB = findViewById<EditText>(R.id.team2)
+        teamB.setText(placar.timeB)
+        val sw = findViewById<Switch>(R.id.swTimer)
         sw.isChecked=placar.has_timer
 
-        // Add a listener to the switch to handle state changes
         sw.setOnCheckedChangeListener { _, isChecked ->
             placar.has_timer = isChecked
-            saveConfig()  // Save the new timer state immediately
+            saveConfig()
         }
     }
 
     fun updatePlacarConfig(){
-        val tv= findViewById<EditText>(R.id.editTextGameName)
-        val sw= findViewById<Switch>(R.id.swTimer)
-        placar.nome_partida= tv.text.toString()
-        placar.has_timer=sw.isChecked
+        val tv = findViewById<EditText>(R.id.editTextGameName)
+        val sw = findViewById<Switch>(R.id.swTimer)
+        val timeA = findViewById<EditText>(R.id.team1)
+        val timeB = findViewById<EditText>(R.id.team2)
+
+        placar.nome_partida = tv.text.toString()
+        placar.timeA = timeA.text.toString()
+        placar.timeB = timeB.text.toString()
+        placar.has_timer = sw.isChecked
     }
 
     fun openPlacar(v: View){ //Executa ao click do Iniciar Jogo

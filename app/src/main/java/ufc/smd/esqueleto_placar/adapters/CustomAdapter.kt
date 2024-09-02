@@ -19,7 +19,6 @@ import ufc.smd.esqueleto_placar.R
 
 class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
-
     // Criação de Novos ViewHolders
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // infla o card_previous_games
@@ -33,8 +32,8 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
         val imageView: ImageView = ItemView.findViewById(R.id.imageview)
         val tvNomePartida: TextView = ItemView.findViewById(R.id.tvNomePartida)
         val tvResultadoJogo: TextView = ItemView.findViewById(R.id.tvResultadoJogo)
-        val tvDataJogo: TextView = ItemView.findViewById(R.id.tvDataJogo) // Add reference to game date TextView
-        val tvTimeVencedor: TextView = ItemView.findViewById(R.id.tvTimeVencedor) // Add reference to winning team TextView
+        val tvDataJogo: TextView = ItemView.findViewById(R.id.tvDataJogo)
+        val tvTimeVencedor: TextView = ItemView.findViewById(R.id.tvTimeVencedor)
         val lnCell: LinearLayout = ItemView.findViewById(R.id.lnCell)
     }
 
@@ -54,17 +53,22 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
             val context = holder.itemView.context
             val intent = Intent(context, GameDetailsActivity::class.java)
 
-//            // Pass data to GameDetailsActivity using Intent extras
-//            intent.putExtra("nome_partida", placarAnterior.nome_partida)
-//            intent.putExtra("resultado_jogo", "${placarAnterior.sets[0]} - ${placarAnterior.sets[1]}")
-//            intent.putExtra("data_jogo", placarAnterior.dataJogo)
-//            intent.putExtra("time_vencedor", placarAnterior.timeVencedor)
+            // Passa dados pro GameDetailsActivity usando Intent extras
+            intent.putExtra("nome_partida", placarAnterior.nome_partida)
+            intent.putExtra("time_vencedor", placarAnterior.timeVencedor)
+            intent.putExtra("time_A", placarAnterior.timeA)
+            intent.putExtra("time_B", placarAnterior.timeB)
+            intent.putExtra("resultado_jogo_games_A", "${placarAnterior.games[0]}")
+            intent.putExtra("resultado_jogo_games_B", "${placarAnterior.games[1]}")
+            intent.putExtra("resultado_jogo_sets_A", "${placarAnterior.sets[0]}")
+            intent.putExtra("resultado_jogo_sets_B", "${placarAnterior.sets[1]}")
+//            intent.putExtra("time_vencedor", "${placarAnterior.games[0]} - ${placarAnterior.games[1]}")
 
             ContextCompat.startActivity(context, intent, null)
         }
     }
 
-    // return the number of the items in the list
+    // retorna o número dos itens na lista
     override fun getItemCount(): Int {
         return mList.size
     }
