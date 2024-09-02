@@ -15,7 +15,7 @@ class ConfigActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
-        openConfig()
+        //openConfig()
         initInterface()
 
     }
@@ -58,6 +58,7 @@ class ConfigActivity : AppCompatActivity() {
 
     }
     fun initInterface(){
+
         val tv = findViewById<EditText>(R.id.editTextGameName)
         tv.setText(placar.nome_partida)
         val teamA = findViewById<EditText>(R.id.team1)
@@ -75,6 +76,7 @@ class ConfigActivity : AppCompatActivity() {
         team2Player2.setText(placar.nomeJogadores[1].second)
 
         val sw = findViewById<Switch>(R.id.swTimer)
+        
         sw.isChecked=placar.has_timer
 
         sw.setOnCheckedChangeListener { _, isChecked ->

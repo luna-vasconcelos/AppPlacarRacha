@@ -145,7 +145,7 @@
     <TextView
         android:id="@+id/tvTimeA"
         style="@style/editText"
-        android:background="@color/YellowLight"
+        android:background="@drawable/roundedittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time A"
@@ -161,7 +161,7 @@
     <TextView
         android:id="@+id/tvTimeB"
         style="@style/editText"
-        android:background="@color/YellowLight"
+        android:background="@drawable/roundedittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time B"
@@ -217,7 +217,7 @@
     <TextView
         android:id="@+id/Tempo"
         style="@style/editText"
-        android:background="@color/YellowLight"
+        android:background="@drawable/roundedittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="556dp"
@@ -232,7 +232,7 @@
     <TextView
         android:id="@+id/timerTextView"
         style="@style/editText"
-        android:background="@color/YellowLight"
+        android:background="@drawable/roundedittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0:00"
