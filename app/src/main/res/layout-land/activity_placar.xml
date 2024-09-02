@@ -133,7 +133,7 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:id="@+id/tvSets1"
+                        android:id="@+id/tvGames1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -141,13 +141,13 @@
                         android:textSize="48sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tvSets2"
+                        app:layout_constraintEnd_toStartOf="@+id/tvGames2"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"></TextView>
 
                     <TextView
-                        android:id="@+id/tvSets2"
+                        android:id="@+id/tvGames2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -157,7 +157,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/tvSets1"
+                        app:layout_constraintStart_toEndOf="@+id/tvGames1"
                         app:layout_constraintTop_toTopOf="parent"></TextView>
 
                     <TextView
