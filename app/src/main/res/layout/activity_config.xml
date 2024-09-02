@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txSeparador" />
 
     <EditText
-        android:id="@+id/Player2TB"
+        android:id="@+id/Player2T2"
         style="@style/editText"
         android:layout_width="200dp"
         android:layout_height="35dp"
@@ -42,10 +42,10 @@
         android:text="Jogador 2 - Time B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Player1TB" />
+        app:layout_constraintTop_toBottomOf="@+id/Player1T2" />
 
     <EditText
-        android:id="@+id/Player1TB"
+        android:id="@+id/Player1T2"
         style="@style/editText"
         android:layout_width="200dp"
         android:layout_height="35dp"
@@ -159,7 +159,7 @@
         android:text="Cronômetro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Player2TB" />
+        app:layout_constraintTop_toBottomOf="@+id/Player2T2" />
 
     <Button
         android:id="@+id/btInitGame"
