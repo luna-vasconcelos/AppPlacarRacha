@@ -30,4 +30,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="textViewDG" >
+        <item name="android:background">@color/greenlight</item>
+        <item name="android:textColor">@color/drakGreen</item>
+
+    </style>
+
+
 </resources>
