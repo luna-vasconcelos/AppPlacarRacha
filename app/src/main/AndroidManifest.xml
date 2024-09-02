@@ -11,22 +11,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Esqueleto_Placar">
+        android:theme="@style/Theme.Esqueleto_Placar"
+        >
         <activity
             android:name=".PlacarActivity"
             android:exported="false"/>
         <activity
             android:name=".PreviousGamesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".GameDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ConfigActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
