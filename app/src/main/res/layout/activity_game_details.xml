@@ -10,7 +10,8 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/background" />
+        android:src="@drawable/background"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/Details"
@@ -21,6 +22,7 @@
         android:text="Detalhes - Jogo"
         android:textSize="34sp"
         android:textStyle="bold|italic"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -34,6 +36,7 @@
         android:text="Resultado"
         android:textSize="28sp"
         android:textStyle="bold|italic"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -50,6 +53,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toStartOf="@+id/team2_name"
         app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +69,7 @@
         android:paddingTop="5dp"
         android:text="Sets Won: 0"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/team2_games_won"
@@ -80,6 +85,7 @@
         android:paddingTop="5dp"
         android:text="Sets vencidos: 0"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/team2_sets_won"
         app:layout_constraintHorizontal_bias="0.059"
@@ -97,6 +103,7 @@
         android:paddingTop="5dp"
         android:text="Games Won: 0"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/team1_player2" />
 
@@ -109,6 +116,7 @@
         android:paddingTop="5dp"
         android:text="Games Won: 0"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.724"
         app:layout_constraintStart_toEndOf="@+id/team1_games_won"
@@ -125,6 +133,7 @@
         android:text="Player 1"
         android:textAlignment="center"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/team2_name" />
 
@@ -139,6 +148,7 @@
         android:text="Player 2"
         android:textAlignment="center"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/team2_name" />
 
@@ -153,6 +163,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Details" />
 
@@ -166,6 +177,7 @@
         android:paddingTop="5dp"
         android:text="Player 1"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toStartOf="@+id/team2_player2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -181,6 +193,7 @@
         android:paddingTop="5dp"
         android:text="Player 2"
         android:textSize="16sp"
+        android:background = "@drawable/roundedittext"
         app:layout_constraintEnd_toStartOf="@+id/team2_player2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -16,29 +16,29 @@
 
     <style name="Buttons" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">@color/BlueDark</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/almostBlack</item>
     </style>
 
     <style name="ButtonH" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">@color/drakGreen</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/almostBlack</item>
     </style>
 
 
     <style name="editText" >
         <item name="android:backgroundTint">@color/lightGray</item>
         <item name="android:background">@color/lightGray</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/almostBlack</item>
     </style>
 
     <style name="textView" >
         <item name="android:background">@color/black</item>
-        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textColor">@color/almostBlack</item>
 
     </style>
     <style name="textViewDG" >
         <item name="android:background">@color/black</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/almostBlack</item>
 
     </style>
 
