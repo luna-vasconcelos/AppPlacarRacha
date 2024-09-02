@@ -49,21 +49,20 @@ class PlacarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
+
         timerTextView = findViewById(R.id.timerTextView)
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
         tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
+
         //Mudar o nome da partida
         val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
         //tvNomePartida.text=placar.nome_partida
-        val matchName = "match1"
-//        ultimoJogos()
+
+        updatePlacar()
 
         if (placar.has_timer) {
             startTimer()
         }
-
-        updatePlacar()
-
         timerTextView.setOnClickListener {
             if (isTimerRunning) {
                 stopTimer()
@@ -127,9 +126,9 @@ class PlacarActivity : AppCompatActivity() {
 
                 // Updatear o time vencedor -> Placeholder
                 val winningTeam = if (placar.sets[0] > placar.sets[1]) {
-                    "Team 1" // Placeholder
+                    placar.timeA
                 } else {
-                    "Team 2" // Placeholder
+                    placar.timeB
                 }
                 placar.timeVencedor = winningTeam
 
@@ -153,7 +152,6 @@ class PlacarActivity : AppCompatActivity() {
            placar.pontua(time)
            updatePlacar()
        }
-        Log.v("placar_alterado",placar.resultado)
         updatePlacar()
     }
 
@@ -196,8 +194,6 @@ class PlacarActivity : AppCompatActivity() {
         val dt = ByteArrayOutputStream()
         val oos = ObjectOutputStream(dt)
         oos.writeObject(placar)
-
-        Log.v("placar_pro_save",placar.resultadoLongo + placar.dataJogo)
 
         edShared.putString("match$numMatches", dt.toString(StandardCharsets.ISO_8859_1.name()))
         edShared.commit()
