@@ -7,6 +7,8 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 
@@ -37,10 +39,17 @@ class PlacarActivity : AppCompatActivity() {
     lateinit var tvResultado: Array<TextView>
     val pilhaPlacar = java.util.Stack<Placar>()
 
+    private var isTimerRunning = false
+    private var elapsedTime = 0L
+    private var timerStartTime = 0L
+    private var handler = Handler(Looper.getMainLooper())
+    private lateinit var runnable: Runnable
+    private lateinit var timerTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
-
+        timerTextView = findViewById(R.id.timerTextView)
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
         tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
         //Mudar o nome da partida
@@ -54,10 +63,39 @@ class PlacarActivity : AppCompatActivity() {
         }
 
         updatePlacar()
+
+        timerTextView.setOnClickListener {
+            if (isTimerRunning) {
+                stopTimer()
+            } else {
+                startTimer()
+            }
+        }
     }
 
     private fun startTimer() {
-        TODO("Not yet implemented")
+        if (!isTimerRunning) {
+            isTimerRunning = true
+            timerStartTime = System.currentTimeMillis() - elapsedTime
+
+            runnable = object : Runnable {
+                override fun run() {
+                    elapsedTime = System.currentTimeMillis() - timerStartTime
+                    val minutes = (elapsedTime / 1000) / 60
+                    val seconds = (elapsedTime / 1000) % 60
+                    timerTextView.text = String.format("%d:%02d", minutes, seconds)
+                    handler.postDelayed(this, 1000)
+                }
+            }
+            handler.post(runnable)
+        }
+    }
+
+    private fun stopTimer() {
+        if (isTimerRunning) {
+            isTimerRunning = false
+            handler.removeCallbacks(runnable)
+        }
     }
 
     fun updatePlacar() {
@@ -98,6 +136,8 @@ class PlacarActivity : AppCompatActivity() {
 //                // Update the UI to show the winning team
 //                val tvNomePartida = findViewById(R.id.tvNomePartida2) as TextView
 //                tvNomePartida.text = winningTeam
+
+                stopTimer()
             }
             else -> {
                 tvNomePartida.text = "bug"
@@ -161,6 +201,7 @@ class PlacarActivity : AppCompatActivity() {
 
         edShared.putString("match$numMatches", dt.toString(StandardCharsets.ISO_8859_1.name()))
         edShared.commit()
+        // TODO: confirmação de jogo salvo pro usuário
     }
 
     fun lerUltimosJogos(v: View){
@@ -195,4 +236,14 @@ class PlacarActivity : AppCompatActivity() {
             Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultadoLongo)
         }
     }
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        stopTimer()
+//    }
+
+//    fun stopTimer(view: View) {
+//
+//    }
+
 }
