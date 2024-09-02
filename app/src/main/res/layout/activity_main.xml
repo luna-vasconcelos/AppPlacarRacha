@@ -14,16 +14,23 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView4"
-        android:layout_width="169dp"
-        android:layout_height="155dp"
-        android:layout_marginBottom="300dp"
+        android:layout_width="222dp"
+        android:layout_height="216dp"
+        android:background="#77BBE7"
+        app:shapeAppearanceOverlay="@style/roundimageView"
+        android:padding="5dp"
+        app:strokeWidth="3dp"
+        app:strokeColor="@color/greenlight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:srcCompat="@drawable/icon" />
+        app:layout_constraintVertical_bias="0.24"
+        app:srcCompat="@drawable/icon"
+        tools:ignore="MissingClass" />
 
     <Button
         android:id="@+id/btIniciar"
