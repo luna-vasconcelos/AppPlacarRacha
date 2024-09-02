@@ -14,27 +14,32 @@
 
     <TextView
         android:id="@+id/Details"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:background="@drawable/roundedittext"
         android:drawablePadding="@dimen/cardview_default_radius"
         android:shadowColor="@color/text_shadow"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="10"
+
         android:text="Detalhes - Jogo"
         android:textColor="@color/drakGreen"
         android:textSize="34sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.072" />
 
+
     <TextView
         android:id="@+id/team1_name"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedittext"
@@ -50,9 +55,11 @@
         app:layout_constraintVertical_bias="0.176" />
 
     <TextView
-        android:id="@+id/team1_players"
+        android:id="@+id/team2_sets_won"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:background="@drawable/roundedittext"
         android:paddingTop="8dp"
         android:text="Player 1, Player 2"
@@ -67,13 +74,17 @@
 
     <TextView
         android:id="@+id/team1_games_won"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:background="@drawable/roundedittext"
         android:paddingTop="8dp"
+
         android:text="Games Won: 0"
         android:textColor="@color/greenlight"
         android:textSize="16sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.123"
@@ -81,24 +92,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.349" />
 
+
     <TextView
-        android:id="@+id/team1_sets_won"
+        android:id="@+id/team2_games_won"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:background="@drawable/roundedittext"
         android:paddingTop="8dp"
         android:text="Sets Won: 0"
         android:textColor="@color/greenlight"
+
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.116"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.412" />
 
+
     <TextView
-        android:id="@+id/team2_name"
+        android:id="@+id/team2_player1"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedittext"
@@ -113,17 +129,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.176" />
 
+
     <TextView
-        android:id="@+id/team2_players"
+        android:id="@+id/team2_player2"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedittext"
         android:paddingTop="8dp"
         android:text="Player 3, Player 4"
         android:textColor="@color/greenlight"
+
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -145,8 +164,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.349" />
 
+
     <TextView
-        android:id="@+id/team2_sets_won"
+        android:id="@+id/team1_player2"
+        style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedittext"

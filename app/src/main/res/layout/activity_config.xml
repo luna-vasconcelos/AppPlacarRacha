@@ -18,6 +18,7 @@
     <EditText
         android:id="@+id/team2"
         style="@style/editText"
+
         android:layout_width="202dp"
         android:layout_height="42dp"
         android:layout_marginTop="20dp"
@@ -31,10 +32,10 @@
         app:layout_constraintTop_toBottomOf="@+id/txSeparador" />
 
     <EditText
-        android:id="@+id/Player2TB"
+        android:id="@+id/Player2T2"
         style="@style/editText"
-        android:layout_width="201dp"
-        android:layout_height="38dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundedittext"
         android:ems="10"
@@ -45,13 +46,13 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Player1TB" />
+        app:layout_constraintTop_toBottomOf="@+id/Player1T2" />
 
     <EditText
-        android:id="@+id/Player1TB"
+        android:id="@+id/Player1T2"
         style="@style/editText"
         android:layout_width="200dp"
-        android:layout_height="36dp"
+        android:layout_height="35dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundedittext"
         android:ems="10"
@@ -68,8 +69,8 @@
     <EditText
         android:id="@+id/editTextGameName"
         style="@style/editText"
-        android:layout_width="198dp"
-        android:layout_height="34dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundedittext"
         android:ems="10"
@@ -87,6 +88,7 @@
         android:id="@+id/tvNomePartida"
         style="@style/textView"
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:background="@drawable/roundedittext"
@@ -104,8 +106,8 @@
 
     <TextView
         android:id="@+id/tvJogadores"
-        android:layout_width="201dp"
-        android:layout_height="33dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginTop="20dp"
         android:text="Jogadores"
         android:textAlignment="center"
@@ -118,8 +120,8 @@
     <EditText
         android:id="@+id/Player1T1"
         style="@style/editText"
-        android:layout_width="201dp"
-        android:layout_height="39dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundedittext"
         android:hint="Jogador 1 - Time A"
@@ -135,8 +137,8 @@
     <EditText
         android:id="@+id/Player2T1"
         style="@style/editText"
-        android:layout_width="201dp"
-        android:layout_height="38dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundedittext"
         android:ems="10"
@@ -151,8 +153,8 @@
 
     <TextView
         android:id="@+id/txSeparador"
-        android:layout_width="42dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
         android:layout_marginTop="5dp"
         android:text="X"
         android:textAlignment="center"
@@ -170,7 +172,7 @@
         android:text="Cronômetro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Player2TB" />
+        app:layout_constraintTop_toBottomOf="@+id/Player2T2" />
 
     <Button
         android:id="@+id/btInitGame"
@@ -189,8 +191,8 @@
     <EditText
         android:id="@+id/team1"
         style="@style/editText"
-        android:layout_width="202dp"
-        android:layout_height="42dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundedittext"
         android:ems="10"

@@ -7,11 +7,14 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.getSystemService
 import ufc.smd.esqueleto_placar.data.Placar
@@ -20,6 +23,7 @@ import ufc.smd.esqueleto_placar.data.strategy.NormalStrategy
 import ufc.smd.esqueleto_placar.data.strategy.SupertieStrategy
 import ufc.smd.esqueleto_placar.data.strategy.TiebreakerStrategy
 import org.w3c.dom.Text
+import ufc.smd.esqueleto_placar.data.Timer
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.ObjectInputStream
@@ -27,7 +31,6 @@ import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -36,6 +39,7 @@ class PlacarActivity : AppCompatActivity() {
     lateinit var placar: Placar
     lateinit var tvResultado: Array<TextView>
     val pilhaPlacar = java.util.Stack<Placar>()
+    lateinit var timer: Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,68 +47,70 @@ class PlacarActivity : AppCompatActivity() {
 
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
         tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
-        //Mudar o nome da partida
-        val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
-        //tvNomePartida.text=placar.nome_partida
-        val matchName = "match1"
-//        ultimoJogos()
+
+        val tvTimeA : TextView? = findViewById<TextView?>(R.id.tvTimeA)
+            tvTimeA?.text = placar.timeA
+        val tvTimeB : TextView? = findViewById<TextView?>(R.id.tvTimeB)
+            tvTimeB?.text = placar.timeB
+
         updatePlacar()
+
+        var timerTextView : TextView = findViewById(R.id.timerTextView)
+        Log.d("pdm",timerTextView.toString())
+        if(placar.has_timer) {
+            timer = Timer(onTick = { elapsedTime ->
+                val minutes = (elapsedTime) / 60
+                val seconds = (elapsedTime) % 60
+                timerTextView.text = String.format("%d:%02d", minutes, seconds)
+            })
+
+            var pauseButton : ImageButton? = findViewById(R.id.btPauseTimer)
+            pauseButton?.setOnClickListener() {
+                if(timer.toggle())
+                    pauseButton.setImageResource(R.drawable.pause_icon)
+                else
+                    pauseButton.setImageResource(R.drawable.play_icon)
+            }
+
+            timer.start()
+        }
+
     }
 
     fun updatePlacar() {
-        val tvGames: Array<TextView> = arrayOf(findViewById(R.id.tvGames1), findViewById(R.id.tvGames2))
-        val tvSets: Array<TextView> = arrayOf(findViewById(R.id.tvSets1), findViewById(R.id.tvSets2))
+        val tvNomePartida = findViewById(R.id.tvNomePartida2) as TextView?
+        val tvGames: Array<TextView?> = arrayOf(findViewById(R.id.tvGames1), findViewById(R.id.tvGames2))
+        val tvSets: Array<TextView?> = arrayOf(findViewById(R.id.tvSets1), findViewById(R.id.tvSets2))
+        val tvNomeJogadores: Array<TextView?> = arrayOf(findViewById(R.id.tvNomeJogador1),findViewById(R.id.tvNomeJogador2),findViewById(R.id.tvNomeJogador3),findViewById(R.id.tvNomeJogador4))
+
+        tvNomePartida?.text = placar.nome_partida
+
         for (i in 0..1) {
-            tvGames[i].text = placar.games[i].toString()
-            tvSets[i].text = placar.sets[i].toString()
+            tvGames[i]?.text = placar.games[i].toString()
+            tvSets[i]?.text = placar.sets[i].toString()
             tvResultado[i].text = placar.getPontos(i)
+            
+            tvNomeJogadores[2*i]?.text = placar.nomeJogadores[i].first
+            tvNomeJogadores[2*i+1]?.text = placar.nomeJogadores[i].second
         }
-        val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
 
-        when {
-            placar.regra is NormalStrategy -> {
-                tvNomePartida.text = "normal"
-                placar.resultado = "normal"
-            }
-            placar.regra is TiebreakerStrategy -> {
-                tvNomePartida.text = "empate"
-                placar.resultado = "empate"
-            }
-            placar.regra is SupertieStrategy -> {
-                tvNomePartida.text = "supertie"
-                placar.resultado = "supertie"
-            }
-            placar.regra is EndgameStrategy -> {
-                tvNomePartida.text = "acabou"
-                placar.resultado = "acabou"
-
-                // Updatear o time vencedor -> Placeholder
-                val winningTeam = if (placar.sets[0] > placar.sets[1]) {
-                    "Team 1" // Placeholder
-                } else {
-                    "Team 2" // Placeholder
-                }
-                placar.timeVencedor = winningTeam
-
-//                // Update the UI to show the winning team
-//                val tvNomePartida = findViewById(R.id.tvNomePartida2) as TextView
-//                tvNomePartida.text = winningTeam
-            }
-            else -> {
-                tvNomePartida.text = "bug"
-                placar.resultado = "bug"
-            }
+        placar.resultado = when {
+            placar.regra is NormalStrategy -> "normal"
+            placar.regra is TiebreakerStrategy -> "empate"
+            placar.regra is SupertieStrategy -> "supertie"
+            placar.regra is EndgameStrategy -> "acabou"
+            else -> "bug"
         }
+
     }
 
     fun alteraPlacar(v: View) {
-       if (v is TextView && !placar.jogoFinalizado()) {
-           pilhaPlacar.push(placar.copy())
-           val time = if (v.id == tvResultado[0].id) 0 else 1
-           placar.pontua(time)
-           updatePlacar()
-       }
-        Log.v("placar_alterado",placar.resultado)
+        if (v is TextView && !placar.jogoFinalizado()) {
+            pilhaPlacar.push(placar.copy())
+            val time = if (v.id == tvResultado[0].id) 0 else 1
+            placar.pontua(time)
+            updatePlacar()
+        }
         updatePlacar()
     }
 
@@ -132,7 +138,7 @@ class PlacarActivity : AppCompatActivity() {
                 val dateTime = sp.getString("matchDateTime${i + 1}", "")
                 edShared.putString("match$i", game)
                 edShared.putString("matchDateTime$i", dateTime)
-                }
+            }
             numMatches = 5
         }
 
@@ -148,42 +154,8 @@ class PlacarActivity : AppCompatActivity() {
         val oos = ObjectOutputStream(dt)
         oos.writeObject(placar)
 
-        Log.v("placar_pro_save",placar.resultadoLongo + placar.dataJogo)
-
         edShared.putString("match$numMatches", dt.toString(StandardCharsets.ISO_8859_1.name()))
         edShared.commit()
-    }
-
-    fun lerUltimosJogos(v: View){
-        val sharedFilename = "PreviousGames"
-        val sp: SharedPreferences = getSharedPreferences(sharedFilename, Context.MODE_PRIVATE)
-
-        var meuObjString:String= sp.getString("match1","").toString()
-        if (meuObjString.length >=1) {
-            var dis = ByteArrayInputStream(meuObjString.toByteArray(Charsets.ISO_8859_1))
-            var oos = ObjectInputStream(dis)
-            var placarAntigo: Placar =oos.readObject() as Placar
-            Log.v("SMD26",placar.resultado)
-        }
-    }
-
-    fun ultimoJogos (matchName: String) {
-        val sharedFilename = "PreviousGames"
-        val sp:SharedPreferences = getSharedPreferences(sharedFilename,Context.MODE_PRIVATE)
-
-        val matchStr:String = sp.getString(matchName, "").toString()
-        Log.v("Jogo do histórico:", matchStr)
-
-        if (matchStr.isNotEmpty()) {
-            val dis = ByteArrayInputStream(matchStr.toByteArray(Charsets.ISO_8859_1))
-            val oos = ObjectInputStream(dis)
-            val prevPlacar: Placar = oos.readObject() as Placar
-
-            // TODO: passar o último jogo pra UI também
-//            tvResultado[0].text = prevPlacar.pontos[0].toString()
-//            tvResultado[1].text = prevPlacar.pontos[1].toString()
-//            tvNomePartida.text = prevPlacar.nome_partida
-            Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultadoLongo)
-        }
+        // TODO: confirmação de jogo salvo pro usuário
     }
 }
