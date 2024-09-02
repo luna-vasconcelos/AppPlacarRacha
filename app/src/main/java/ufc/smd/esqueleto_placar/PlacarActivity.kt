@@ -64,16 +64,11 @@ class PlacarActivity : AppCompatActivity() {
                 timerTextView.text = String.format("%d:%02d", minutes, seconds)
             })
 
-            var pauseButton : ImageButton? = findViewById(R.id.btPauseTimer)
+            var pauseButton: TextView = findViewById(R.id.timerTextView)
             pauseButton?.setOnClickListener() {
-                if(timer.toggle())
-                    pauseButton.setImageResource(R.drawable.pause_icon)
-                else
-                    pauseButton.setImageResource(R.drawable.play_icon)
+                timer.toggle()
+                timer.start()
             }
-
-            timer.start()
-        }
 
     }
 
