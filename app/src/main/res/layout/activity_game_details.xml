@@ -98,7 +98,7 @@
         android:text="Games Won: 0"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/team1_players" />
+        app:layout_constraintTop_toBottomOf="@+id/team1_player2" />
 
     <TextView
         android:id="@+id/team2_games_won"
@@ -112,17 +112,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.724"
         app:layout_constraintStart_toEndOf="@+id/team1_games_won"
-        app:layout_constraintTop_toBottomOf="@+id/team2_players" />
+        app:layout_constraintTop_toBottomOf="@+id/team2_player2" />
 
     <TextView
-        android:id="@+id/team2_players"
+        android:id="@+id/team2_player1"
         style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="44dp"
         android:paddingTop="5dp"
-        android:text="Player 3, Player 4"
+        android:text="Player 1"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/team2_name" />
+
+    <TextView
+        android:id="@+id/team2_player2"
+        style="@style/textViewDG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="44dp"
+        android:paddingTop="5dp"
+        android:text="Player 2"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -143,16 +157,31 @@
         app:layout_constraintTop_toBottomOf="@+id/Details" />
 
     <TextView
-        android:id="@+id/team1_players"
+        android:id="@+id/player1T01"
         style="@style/textViewDG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="52dp"
         android:paddingTop="5dp"
-        android:text="Player 1, Player 2"
+        android:text="Player 1"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/team2_players"
+        app:layout_constraintEnd_toStartOf="@+id/team2_player2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/team1_name" />
+
+    <TextView
+        android:id="@+id/team1_player2"
+        style="@style/textViewDG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="96dp"
+        android:paddingTop="5dp"
+        android:text="Player 2"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/team2_player2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/team1_name" />

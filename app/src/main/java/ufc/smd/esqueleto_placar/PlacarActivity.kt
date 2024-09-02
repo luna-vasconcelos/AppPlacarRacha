@@ -31,7 +31,6 @@ import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -48,6 +47,11 @@ class PlacarActivity : AppCompatActivity() {
 
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
         tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
+
+        val tvTimeA = findViewById<TextView>(R.id.tvTimeA)
+        tvTimeA.text = placar.timeA
+        val tvTimeB = findViewById<TextView>(R.id.tvTimeB)
+        tvTimeB.text = placar.timeB
 
         updatePlacar()
 
@@ -85,7 +89,7 @@ class PlacarActivity : AppCompatActivity() {
             tvGames[i].text = placar.games[i].toString()
             tvSets[i].text = placar.sets[i].toString()
             tvResultado[i].text = placar.getPontos(i)
-
+            
             tvNomeJogadores[2*i]?.text = placar.nomeJogadores[i].first
             tvNomeJogadores[2*i+1]?.text = placar.nomeJogadores[i].second
         }
