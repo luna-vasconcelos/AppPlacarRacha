@@ -19,7 +19,10 @@ class GameDetailsActivity  : AppCompatActivity() {
         val gamesB = intent.getStringExtra("resultado_jogo_games_B")
         val setsA = intent.getStringExtra("resultado_jogo_sets_A")
         val setsB = intent.getStringExtra("resultado_jogo_sets_B")
-//        val dataJogo = intent.getStringExtra("data_jogo")
+        val team1_player1 = intent.getStringExtra("team1_player1")
+        val team1_player2 = intent.getStringExtra("team1_player2")
+        val team2_player1 = intent.getStringExtra("team2_player1")
+        val team2_player2 = intent.getStringExtra("team2_player2")
 
         // Pegando do layout
         val tvNomePartida = findViewById<TextView>(R.id.Details)
@@ -30,7 +33,10 @@ class GameDetailsActivity  : AppCompatActivity() {
         val tvGamesTimeB = findViewById<TextView>(R.id.team2_games_won)
         val tvSetsTimeA = findViewById<TextView>(R.id.team1_sets_won)
         val tvSetsTimeB = findViewById<TextView>(R.id.team2_sets_won)
-//    val tvDataJogo = findViewById<TextView>(R.id.tvDataJogoDetails)
+        val tvteam1_player1 = findViewById<TextView>(R.id.player1T01)
+        val tvteam1_player2 = findViewById<TextView>(R.id.team1_player2)
+        val tvteam2_player1 = findViewById<TextView>(R.id.team2_player1)
+        val tvteam2_player2 = findViewById<TextView>(R.id.team2_player2)
 
         // Atualizando layout
         tvNomePartida.text = nomePartida
@@ -41,6 +47,9 @@ class GameDetailsActivity  : AppCompatActivity() {
         tvGamesTimeB.text = "Games vencidos: $gamesB!"
         tvSetsTimeA.text = "Sets vencidos: $setsA!"
         tvSetsTimeB.text = "Sets vencidos: $setsB!"
-//    tvDataJogo.text = dataJogo
+        tvteam1_player1.text = "Jogador 1: $team1_player1"
+        tvteam1_player2.text = "Jogador 2: $team1_player2"
+        tvteam2_player1.text = "Jogador 1: $team2_player1"
+        tvteam2_player2.text = "Jogador 2: $team2_player2"
     }
 }

@@ -29,7 +29,6 @@ import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -53,10 +52,10 @@ class PlacarActivity : AppCompatActivity() {
         timerTextView = findViewById(R.id.timerTextView)
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
         tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
-
-        //Mudar o nome da partida
-        val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
-        //tvNomePartida.text=placar.nome_partida
+        val tvTimeA = findViewById<TextView>(R.id.tvTimeA)
+        tvTimeA.text = placar.timeA
+        val tvTimeB = findViewById<TextView>(R.id.tvTimeB)
+        tvTimeB.text = placar.timeB
 
         updatePlacar()
 
@@ -124,7 +123,7 @@ class PlacarActivity : AppCompatActivity() {
                 tvNomePartida.text = "acabou"
                 placar.resultado = "acabou"
 
-                // Updatear o time vencedor -> Placeholder
+                // Updatear o time vencedor
                 val winningTeam = if (placar.sets[0] > placar.sets[1]) {
                     placar.timeA
                 } else {

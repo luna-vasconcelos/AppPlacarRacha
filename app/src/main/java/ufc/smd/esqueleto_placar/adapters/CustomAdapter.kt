@@ -62,7 +62,10 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
             intent.putExtra("resultado_jogo_games_B", "${placarAnterior.games[1]}")
             intent.putExtra("resultado_jogo_sets_A", "${placarAnterior.sets[0]}")
             intent.putExtra("resultado_jogo_sets_B", "${placarAnterior.sets[1]}")
-//            intent.putExtra("time_vencedor", "${placarAnterior.games[0]} - ${placarAnterior.games[1]}")
+            intent.putExtra("team1_player1",  "${placarAnterior.nomeJogadores[0].first}")
+            intent.putExtra("team1_player2",  "${placarAnterior.nomeJogadores[0].second}")
+            intent.putExtra("team2_player1",  "${placarAnterior.nomeJogadores[1].first}")
+            intent.putExtra("team2_player2",  "${placarAnterior.nomeJogadores[1].second}")
 
             ContextCompat.startActivity(context, intent, null)
         }
