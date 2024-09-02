@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Esqueleto_Placar">
         <activity
             android:name=".PlacarActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".PreviousGamesActivity"
             android:exported="false" />
