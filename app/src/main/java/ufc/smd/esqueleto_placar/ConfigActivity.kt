@@ -42,6 +42,12 @@ class ConfigActivity : AppCompatActivity() {
         tv.setText(placar.nome_partida)
         val sw= findViewById<Switch>(R.id.swTimer)
         sw.isChecked=placar.has_timer
+
+        // Add a listener to the switch to handle state changes
+        sw.setOnCheckedChangeListener { _, isChecked ->
+            placar.has_timer = isChecked
+            saveConfig()  // Save the new timer state immediately
+        }
     }
 
     fun updatePlacarConfig(){

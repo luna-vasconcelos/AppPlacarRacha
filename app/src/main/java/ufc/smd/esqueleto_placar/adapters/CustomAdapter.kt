@@ -1,5 +1,6 @@
 package ufc.smd.esqueleto_placar.adapters
 
+import android.content.Intent
 import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,8 +10,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import ufc.smd.esqueleto_placar.GameDetailsActivity
 import ufc.smd.esqueleto_placar.data.Placar
 import ufc.smd.esqueleto_placar.R
 
@@ -46,13 +49,18 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
         holder.tvDataJogo.text = placarAnterior.dataJogo
         holder.tvTimeVencedor.text = placarAnterior.timeVencedor
 
-        holder.lnCell.setOnClickListener{
-            val duration= Snackbar.LENGTH_LONG
-            val text= placarAnterior.resultadoLongo
+        // Abre os detalhes do jogo ao clicar
+        holder.lnCell.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, GameDetailsActivity::class.java)
 
-            val snack= Snackbar.make(holder.lnCell,text,duration)
-            snack.show()
+//            // Pass data to GameDetailsActivity using Intent extras
+//            intent.putExtra("nome_partida", placarAnterior.nome_partida)
+//            intent.putExtra("resultado_jogo", "${placarAnterior.sets[0]} - ${placarAnterior.sets[1]}")
+//            intent.putExtra("data_jogo", placarAnterior.dataJogo)
+//            intent.putExtra("time_vencedor", placarAnterior.timeVencedor)
 
+            ContextCompat.startActivity(context, intent, null)
         }
     }
 
