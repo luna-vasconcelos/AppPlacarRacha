@@ -203,47 +203,4 @@ class PlacarActivity : AppCompatActivity() {
         edShared.commit()
         // TODO: confirmação de jogo salvo pro usuário
     }
-
-    fun lerUltimosJogos(v: View){
-        val sharedFilename = "PreviousGames"
-        val sp: SharedPreferences = getSharedPreferences(sharedFilename, Context.MODE_PRIVATE)
-
-        var meuObjString:String= sp.getString("match1","").toString()
-        if (meuObjString.length >=1) {
-            var dis = ByteArrayInputStream(meuObjString.toByteArray(Charsets.ISO_8859_1))
-            var oos = ObjectInputStream(dis)
-            var placarAntigo: Placar =oos.readObject() as Placar
-            Log.v("SMD26",placar.resultado)
-        }
-    }
-
-    fun ultimoJogos (matchName: String) {
-        val sharedFilename = "PreviousGames"
-        val sp:SharedPreferences = getSharedPreferences(sharedFilename,Context.MODE_PRIVATE)
-
-        val matchStr:String = sp.getString(matchName, "").toString()
-        Log.v("Jogo do histórico:", matchStr)
-
-        if (matchStr.isNotEmpty()) {
-            val dis = ByteArrayInputStream(matchStr.toByteArray(Charsets.ISO_8859_1))
-            val oos = ObjectInputStream(dis)
-            val prevPlacar: Placar = oos.readObject() as Placar
-
-            // TODO: passar o último jogo pra UI também
-//            tvResultado[0].text = prevPlacar.pontos[0].toString()
-//            tvResultado[1].text = prevPlacar.pontos[1].toString()
-//            tvNomePartida.text = prevPlacar.nome_partida
-            Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultadoLongo)
-        }
-    }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        stopTimer()
-//    }
-
-//    fun stopTimer(view: View) {
-//
-//    }
-
 }
