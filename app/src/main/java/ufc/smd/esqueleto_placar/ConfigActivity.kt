@@ -15,7 +15,7 @@ class ConfigActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
-        //openConfig()
+        openConfig()
         initInterface()
 
     }
@@ -41,14 +41,14 @@ class ConfigActivity : AppCompatActivity() {
     {
         val sharedFilename = "configPlacar"
         val sp:SharedPreferences = getSharedPreferences(sharedFilename,Context.MODE_PRIVATE)
-        placar.nome_partida = sp.getString("matchname","Jogo Padrão").toString()
-        placar.timeA = sp.getString("teamA","TimeA").toString()
-        placar.timeB = sp.getString("teamB","TimeB").toString()
+        placar.nome_partida = sp.getString("matchname","").toString()
+        placar.timeA = sp.getString("teamA","").toString()
+        placar.timeB = sp.getString("teamB","").toString()
 
-        val team1Player1 = sp.getString("team1_player1", "Jogador").toString()
-        val team1Player2 = sp.getString("team1_player2", "Jogador").toString()
-        val team2Player1 = sp.getString("team2_player1", "Jogador").toString()
-        val team2Player2 = sp.getString("team2_player2", "Jogador").toString()
+        val team1Player1 = sp.getString("team1_player1", "").toString()
+        val team1Player2 = sp.getString("team1_player2", "").toString()
+        val team2Player1 = sp.getString("team2_player1", "").toString()
+        val team2Player2 = sp.getString("team2_player2", "").toString()
         placar.nomeJogadores = arrayOf(
             Pair(team1Player1, team1Player2),
             Pair(team2Player1, team2Player2)
