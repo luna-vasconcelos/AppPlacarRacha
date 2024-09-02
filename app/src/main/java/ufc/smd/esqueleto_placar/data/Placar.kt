@@ -14,6 +14,8 @@ data class Placar(var nome_partida: String, var resultado: String, var resultado
     var ladosTrocados: Int = 0
     var dataJogo: String = ""
     var timeVencedor: String = ""
+    var timeA: String = ""
+    var timeB: String = ""
 
     fun jogoFinalizado(): Boolean {
         return regra is EndgameStrategy

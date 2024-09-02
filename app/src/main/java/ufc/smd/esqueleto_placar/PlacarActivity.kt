@@ -7,6 +7,8 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 
@@ -27,7 +29,6 @@ import java.io.ObjectOutputStream
 import java.nio.charset.StandardCharsets
 
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -37,18 +38,62 @@ class PlacarActivity : AppCompatActivity() {
     lateinit var tvResultado: Array<TextView>
     val pilhaPlacar = java.util.Stack<Placar>()
 
+    private var isTimerRunning = false
+    private var elapsedTime = 0L
+    private var timerStartTime = 0L
+    private var handler = Handler(Looper.getMainLooper())
+    private lateinit var runnable: Runnable
+    private lateinit var timerTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
 
+        timerTextView = findViewById(R.id.timerTextView)
         placar = getIntent().getExtras()?.getSerializable("placar") as Placar
         tvResultado = arrayOf(findViewById(R.id.tvPlacar1), findViewById(R.id.tvPlacar2))
-        //Mudar o nome da partida
-        val tvNomePartida=findViewById(R.id.tvNomePartida2) as TextView
-        //tvNomePartida.text=placar.nome_partida
-        val matchName = "match1"
-//        ultimoJogos()
+        val tvTimeA = findViewById<TextView>(R.id.tvTimeA)
+        tvTimeA.text = placar.timeA
+        val tvTimeB = findViewById<TextView>(R.id.tvTimeB)
+        tvTimeB.text = placar.timeB
+
         updatePlacar()
+
+        if (placar.has_timer) {
+            startTimer()
+        }
+        timerTextView.setOnClickListener {
+            if (isTimerRunning) {
+                stopTimer()
+            } else {
+                startTimer()
+            }
+        }
+    }
+
+    private fun startTimer() {
+        if (!isTimerRunning) {
+            isTimerRunning = true
+            timerStartTime = System.currentTimeMillis() - elapsedTime
+
+            runnable = object : Runnable {
+                override fun run() {
+                    elapsedTime = System.currentTimeMillis() - timerStartTime
+                    val minutes = (elapsedTime / 1000) / 60
+                    val seconds = (elapsedTime / 1000) % 60
+                    timerTextView.text = String.format("%d:%02d", minutes, seconds)
+                    handler.postDelayed(this, 1000)
+                }
+            }
+            handler.post(runnable)
+        }
+    }
+
+    private fun stopTimer() {
+        if (isTimerRunning) {
+            isTimerRunning = false
+            handler.removeCallbacks(runnable)
+        }
     }
 
     fun updatePlacar() {
@@ -78,17 +123,19 @@ class PlacarActivity : AppCompatActivity() {
                 tvNomePartida.text = "acabou"
                 placar.resultado = "acabou"
 
-                // Updatear o time vencedor -> Placeholder
+                // Updatear o time vencedor
                 val winningTeam = if (placar.sets[0] > placar.sets[1]) {
-                    "Team 1" // Placeholder
+                    placar.timeA
                 } else {
-                    "Team 2" // Placeholder
+                    placar.timeB
                 }
                 placar.timeVencedor = winningTeam
 
 //                // Update the UI to show the winning team
 //                val tvNomePartida = findViewById(R.id.tvNomePartida2) as TextView
 //                tvNomePartida.text = winningTeam
+
+                stopTimer()
             }
             else -> {
                 tvNomePartida.text = "bug"
@@ -104,7 +151,6 @@ class PlacarActivity : AppCompatActivity() {
            placar.pontua(time)
            updatePlacar()
        }
-        Log.v("placar_alterado",placar.resultado)
         updatePlacar()
     }
 
@@ -148,42 +194,8 @@ class PlacarActivity : AppCompatActivity() {
         val oos = ObjectOutputStream(dt)
         oos.writeObject(placar)
 
-        Log.v("placar_pro_save",placar.resultadoLongo + placar.dataJogo)
-
         edShared.putString("match$numMatches", dt.toString(StandardCharsets.ISO_8859_1.name()))
         edShared.commit()
-    }
-
-    fun lerUltimosJogos(v: View){
-        val sharedFilename = "PreviousGames"
-        val sp: SharedPreferences = getSharedPreferences(sharedFilename, Context.MODE_PRIVATE)
-
-        var meuObjString:String= sp.getString("match1","").toString()
-        if (meuObjString.length >=1) {
-            var dis = ByteArrayInputStream(meuObjString.toByteArray(Charsets.ISO_8859_1))
-            var oos = ObjectInputStream(dis)
-            var placarAntigo: Placar =oos.readObject() as Placar
-            Log.v("SMD26",placar.resultado)
-        }
-    }
-
-    fun ultimoJogos (matchName: String) {
-        val sharedFilename = "PreviousGames"
-        val sp:SharedPreferences = getSharedPreferences(sharedFilename,Context.MODE_PRIVATE)
-
-        val matchStr:String = sp.getString(matchName, "").toString()
-        Log.v("Jogo do histórico:", matchStr)
-
-        if (matchStr.isNotEmpty()) {
-            val dis = ByteArrayInputStream(matchStr.toByteArray(Charsets.ISO_8859_1))
-            val oos = ObjectInputStream(dis)
-            val prevPlacar: Placar = oos.readObject() as Placar
-
-            // TODO: passar o último jogo pra UI também
-//            tvResultado[0].text = prevPlacar.pontos[0].toString()
-//            tvResultado[1].text = prevPlacar.pontos[1].toString()
-//            tvNomePartida.text = prevPlacar.nome_partida
-            Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultadoLongo)
-        }
+        // TODO: confirmação de jogo salvo pro usuário
     }
 }
