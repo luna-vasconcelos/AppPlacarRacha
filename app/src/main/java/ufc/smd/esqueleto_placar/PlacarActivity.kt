@@ -1,5 +1,6 @@
 package ufc.smd.esqueleto_placar
 
+import PopupMessageDialog
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -67,9 +68,13 @@ class PlacarActivity : AppCompatActivity() {
             var pauseButton: TextView = findViewById(R.id.timerTextView)
             pauseButton?.setOnClickListener() {
                 timer.toggle()
-                timer.start()
             }
 
+            timer.start()
+        }
+        else {
+            timer = Timer(onTick = {elapsedTime -> elapsedTime})
+        }
     }
 
     fun updatePlacar() {
@@ -100,6 +105,7 @@ class PlacarActivity : AppCompatActivity() {
     }
 
     fun alteraPlacar(v: View) {
+        var lados: Int = placar.ladosTrocados
         if (v is TextView && !placar.jogoFinalizado()) {
             pilhaPlacar.push(placar.copy())
             val time = if (v.id == tvResultado[0].id) 0 else 1
@@ -107,6 +113,15 @@ class PlacarActivity : AppCompatActivity() {
             updatePlacar()
         }
         updatePlacar()
+        if(lados != placar.ladosTrocados) {
+            timer.pause()
+            val popup = PopupMessageDialog("Troca de lados!") {
+                timer.start()
+            }
+            popup.show(supportFragmentManager, "popup_message")
+
+        }
+
     }
 
     fun  desfazer(v: View) {

@@ -1,18 +1,14 @@
 package ufc.smd.esqueleto_placar.adapters
 
 import android.content.Intent
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import ufc.smd.esqueleto_placar.GameDetailsActivity
 import ufc.smd.esqueleto_placar.data.Placar
 import ufc.smd.esqueleto_placar.R
@@ -31,7 +27,7 @@ class CustomAdapter(private val mList: List<Placar>) : RecyclerView.Adapter<Cust
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = ItemView.findViewById(R.id.imageview)
         val tvNomePartida: TextView = ItemView.findViewById(R.id.tvNomePartida)
-        val tvResultadoJogo: TextView = ItemView.findViewById(R.id.tvResultadoJogo)
+        val tvResultadoJogo: TextView = ItemView.findViewById(R.id.tvMessage)
         val tvDataJogo: TextView = ItemView.findViewById(R.id.tvDataJogo)
         val tvTimeVencedor: TextView = ItemView.findViewById(R.id.tvTimeVencedor)
         val lnCell: LinearLayout = ItemView.findViewById(R.id.lnCell)
